@@ -5,32 +5,17 @@
 #include <vector>
 
 namespace sndctl {
-
 struct PcmBuffer {
-
   std::vector<int16_t> samples;
   uint32_t sample_rate;
   uint16_t channels;
   uint16_t bits_per_sample;
 
   PcmBuffer(uint32_t sample_rate = 44100, uint16_t channels = 2,
-            uint16_t bits_per_sample = 16)
-      : sample_rate(sample_rate), channels(channels),
-        bits_per_sample(bits_per_sample) {}
+            uint16_t bits_per_sample = 16);
 
-  double duration() const {
-    if (sample_rate == 0 || channels == 0) {
-      return 0.0;
-    }
-    return (double)samples.size() / ((double)sample_rate * (double)channels);
-  }
-
-  size_t frame_count() const {
-    if (channels == 0) {
-      return 0;
-    }
-    return samples.size() / channels;
-  }
+  double duration() const;
+  size_t frame_count() const;
 };
 } // namespace sndctl
 
